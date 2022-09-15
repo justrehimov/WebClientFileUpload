@@ -1,0 +1,56 @@
+Muhit:
+Language:java
+Framework:spring boot
+Database: postgre ve ya mysql
+API: REST API
+
+
+Telebler:
+
+1) Istifadəçi qeydiyyatı (Ad, Soyad, Email, Password, Profile sekli və Rolu (Hr və ya İş axtaran))
+Profil sekli ucun api verilecek sekil ora post sorgusu olaraq multipart file seklinde gonderilmelidir
+ geriye response olaraq seklin url-i qayidacaq ve qeydiyyat zamani hemin url istifade olunacaq
+(File upload ucun istifade olunacaq api => https://vusalrehimov.000webhostapp.com/upload.php)
+bu apiye 'file' keywordu olaraq multipart form data gonderilmelidir ve bu java terefde olacaq bir basa bu urle muraciet edilmeyecek
+Apiden geriye qayidacaq response bu sekilde olacaq => 
+
+{
+    "result": {
+        "url": "vusalrehimov.000webhostapp.com/upload/108067gitsshkey.txt"
+    },
+    "error": false,
+    "code": 200
+}
+
+
+2) İstifadəçi emaili unikal olmalı və qeydiyyatdan keçərkən tesdiq maili getmeli. Eger istifadeci emaili
+tesdiqlemese login ola bilmemelidir.(Aktivasiya linkinin müddəti 15 deqiqedir istifadeci 15 deqiqe icinde emaili tesdiqlemese
+link deaktiv edilmeli ve yeni link almaq ucun yalniz emaili ile muraciet etmelidir)
+
+3) Istifadəçi Login olmaq üçün email ve passwordan istifade edecek. Eger ugurla login olsa geriye (JWT token)
+qayitmali ve her request gonderdikde o token isitifade olunmalidir.
+
+4)Istifadeci eger passwordu unutsa, passwordu yenilemek ucun maile link gelmelidir ve hemin link vasitesile passwordu sifirlamalidir
+QEYD: password yenileme linki ve aktivasiya linki adeten front terefin web sehifesinde olur biz sadece ordan gelen dogrulama tokenine gore 
+istifade ederek istifadecinin melumatlarini deyise bilirik, yeni bizim tek edeceyimiz password reset linkine ve ya aktivasiya linkine
+POST sorgusu gondermek olacaq ve orda yeni passwordu gondermeliyik ve ya hesabi tesdiqlemeliyik (Bu istifadecinin ne edecyine bagli, ya password deyismek yada email tesdiqleme)
+
+5)Istifadecilerin her ikisi oz melumatlarini edit ede bilmelidir eger maili edit edeceklerse tesdiq maili getmelidir, mail tesdiq olunmadigi halda istifadecinin yeni maili deyismeyecek(Amma diger melumatlar deyismelidir)
+
+6) Istifadəçi eger iş axtarandırsa yalnız vakansiyaları  axtara ve baxa biler.
+
+7) Istifadəçi eger HR - dirsa vakansiya paylasa, baxa ,axtara, edit ve delete ede biler
+
+8) Vakansiya paylasmaq ucun lazim olan melumatlar(Vakansiya adi, Maaş, Address, Vakansiya bitme tarixi, Vakansiya paylasilma tarixi, Vakansiya telebleri, Vakansiya haqqinda umumi melumat)
+
+9)Vakansiya axtarmaq filter kimi olacaq (Adina, Maas araligi, Son bitme tarixine gore(araliq olmali), Paylasimla tarixine gore(aralig olmali))
+Bu paramterlerin hamisi optional olmalidir(hec bir parametr verilmedikde butun vakansiyalar gelmelidir)Note: List seklinde gelen butun apilerde Pagination islenmelidir
+(Paginationda page number ve size filter olaraq gonderile bilmelidir amma mecbur deyil ona uygun default qiymetler goturulmelidir)
+Pagination olan butun apilerde page number ve size response kimi qayitmalidir!
+
+8)Exceptionlar response kimi qayitmalidir
+
+9) Taski gite yukleye ve ya .zip formatinda ata bilersiz (Taskdaki apilerin nece islediyine uygun dokumentasiya olmalidir qayidan responselar nece olacaq ve ya gonderile data nece gonderilecek
+buna aid dokumentasiya mutleq olmalidir);
+
+10) Anlamadiginiz sual olsa anlamaga calisin sonra soruşun biraz mentiq isledin her sey taska uygun olmali deyil amma dediyim seyler olmaq şərtilə kiçik düzəlişlər edilə bilər
